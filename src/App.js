@@ -1,7 +1,12 @@
+import { useState } from "react";
+import Header from "./Header";
+import data from "./data.json";
+
 function App() {
+  const [ toDoList, setToDoList] = useState(data);
   return (
     <div className="App">
-      <h1>ToDo List</h1>
+      <Header />
     </div>
   );
 }
