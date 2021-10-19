@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from "./Header";
 import ToDoList from "./ToDoList";
+import ToDoForm from "./ToDoForm";
 
 import "./App.css";
 import data from "./data.json";
@@ -10,7 +11,7 @@ function App() {
 
   const handleToggle = (id) => {
     let mapped = toDoList.map((task) => {
-      return task.id === id
+      return task.id === Number(id)
         ? { ...task, complete: !task.complete }
         : { ...task };
     });
@@ -24,6 +25,12 @@ function App() {
     setToDoList(filtered);
   };
 
+  const addTask = (userInput) => {
+    let copy = [...toDoList];
+    copy = [...copy, {id: toDoList.length + 1, task: userInput, complete: false}];
+    setToDoList(copy);
+  }
+
   return (
     <div className="App">
       <Header />
@@ -32,6 +39,7 @@ function App() {
         handleToggle={handleToggle}
         handleFilter={handleFilter}
       />
+      <ToDoForm addTask={addTask} />
     </div>
   );
 }
